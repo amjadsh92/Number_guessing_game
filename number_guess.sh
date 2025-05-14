@@ -9,6 +9,8 @@ if [[ -z $USER_NAME_EXIST ]]
 then
 USER_INSERTED=$($PSQL "INSERT INTO users(name) VALUES('$USER_NAME')")
 echo "Welcome, $USER_NAME! It looks like this is your first time here."
+else
+echo "Welcome back, $USER_NAME!"
 fi
 echo "Guess the secret number between 1 and 1000:"
 read NUMBER_GUESSED
