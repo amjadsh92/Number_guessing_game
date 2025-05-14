@@ -12,7 +12,13 @@ echo "Welcome, $USER_NAME! It looks like this is your first time here."
 else
 echo "Welcome back, $USER_NAME!"
 fi
+SECRET_NUMBER=$(( RANDOM % 100 + 1 ))
 echo "Guess the secret number between 1 and 1000:"
 read NUMBER_GUESSED
+if [[ ! $NUMBER_GUESSED =~ ^-?[0-9]+$ ]]
+then
+echo "That is not an integer, guess again:"
+read NUMBER_GUESSED
+fi
  
 
