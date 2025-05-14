@@ -10,7 +10,10 @@ then
 USER_INSERTED=$($PSQL "INSERT INTO users(name) VALUES('$USER_NAME')")
 echo "Welcome, $USER_NAME! It looks like this is your first time here."
 else
-echo "Welcome back, $USER_NAME!"
+USER_ID=$($PSQL "SELECT user_id FROM users WHERE name='$USER_NAME'")
+GAMES_PLAYED=$($PSQL "SELECT COUNT(*) FROM games WHERE user_id=$USER_ID")
+MINIMAL_GUESSES=$($PSQL "SELECT MIN(number_of_guesses) FROM games WHERE user_id=$USER_ID")
+echo "Welcome back, $USER_NAME!You have played $GAMES_PLAYED games, and your best game took $MINIMAL_GUESSES guesses."
 fi
 SECRET_NUMBER=$(( RANDOM % 1000 + 1 ))
 NUMBER_OF_GUESSES=0
